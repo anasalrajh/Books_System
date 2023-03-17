@@ -1,0 +1,350 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BooksModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Books_Authors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BookId" Type="int" />
+          <Property Name="AuthorId" Type="int" />
+        </EntityType>
+        <EntityType Name="Books_Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BookId" Type="int" />
+          <Property Name="CategoryId" Type="int" />
+        </EntityType>
+        <EntityType Name="tblAuthors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblBooks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BookName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descrption" Type="varchar(max)" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblSubCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubName" Type="varchar" MaxLength="50" />
+          <Property Name="MainCat" Type="int" />
+        </EntityType>
+        <Association Name="FK__Books_Aut__Autho__1B0907CE">
+          <End Role="tblAuthors" Type="Self.tblAuthors" Multiplicity="0..1" />
+          <End Role="Books_Authors" Type="Self.Books_Authors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAuthors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Books_Authors">
+              <PropertyRef Name="AuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Books_Aut__BookI__1A14E395">
+          <End Role="tblBooks" Type="Self.tblBooks" Multiplicity="0..1" />
+          <End Role="Books_Authors" Type="Self.Books_Authors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBooks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Books_Authors">
+              <PropertyRef Name="BookId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Books_Cat__BookI__1CF15040">
+          <End Role="tblBooks" Type="Self.tblBooks" Multiplicity="0..1" />
+          <End Role="Books_Category" Type="Self.Books_Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBooks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Books_Category">
+              <PropertyRef Name="BookId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="SelectBooks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SubId" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="BooksModelStoreContainer">
+          <EntitySet Name="Books_Authors" EntityType="Self.Books_Authors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Books_Category" EntityType="Self.Books_Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblAuthors" EntityType="Self.tblAuthors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblBooks" EntityType="Self.tblBooks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCategory" EntityType="Self.tblCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblSubCategory" EntityType="Self.tblSubCategory" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Books_Aut__Autho__1B0907CE" Association="Self.FK__Books_Aut__Autho__1B0907CE">
+            <End Role="tblAuthors" EntitySet="tblAuthors" />
+            <End Role="Books_Authors" EntitySet="Books_Authors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Books_Aut__BookI__1A14E395" Association="Self.FK__Books_Aut__BookI__1A14E395">
+            <End Role="tblBooks" EntitySet="tblBooks" />
+            <End Role="Books_Authors" EntitySet="Books_Authors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Books_Cat__BookI__1CF15040" Association="Self.FK__Books_Cat__BookI__1CF15040">
+            <End Role="tblBooks" EntitySet="tblBooks" />
+            <End Role="Books_Category" EntitySet="Books_Category" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BooksModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Books_Authors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BookId" Type="Int32" />
+          <Property Name="AuthorId" Type="Int32" />
+          <NavigationProperty Name="tblAuthor" Relationship="Self.FK__Books_Aut__Autho__1B0907CE" FromRole="Books_Authors" ToRole="tblAuthors" />
+          <NavigationProperty Name="tblBook" Relationship="Self.FK__Books_Aut__BookI__1A14E395" FromRole="Books_Authors" ToRole="tblBooks" />
+        </EntityType>
+        <EntityType Name="Books_Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BookId" Type="Int32" />
+          <Property Name="CategoryId" Type="Int32" />
+          <NavigationProperty Name="tblBook" Relationship="Self.FK__Books_Cat__BookI__1CF15040" FromRole="Books_Category" ToRole="tblBooks" />
+          <NavigationProperty Name="tblCategory" Relationship="Self.FK__Books_Cat__Categ__1BFD2C07" FromRole="Books_Category" ToRole="tblCategory" />
+        </EntityType>
+        <EntityType Name="tblAuthor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Books_Authors" Relationship="Self.FK__Books_Aut__Autho__1B0907CE" FromRole="tblAuthors" ToRole="Books_Authors" />
+        </EntityType>
+        <EntityType Name="tblBook">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BookName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descrption" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Books_Authors" Relationship="Self.FK__Books_Aut__BookI__1A14E395" FromRole="tblBooks" ToRole="Books_Authors" />
+          <NavigationProperty Name="Books_Category" Relationship="Self.FK__Books_Cat__BookI__1CF15040" FromRole="tblBooks" ToRole="Books_Category" />
+        </EntityType>
+        <EntityType Name="tblCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Books_Category" Relationship="Self.FK__Books_Cat__Categ__1BFD2C07" FromRole="tblCategory" ToRole="Books_Category" />
+        </EntityType>
+        <EntityType Name="tblSubCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MainCat" Type="Int32" />
+        </EntityType>
+        <Association Name="FK__Books_Aut__Autho__1B0907CE">
+          <End Role="tblAuthors" Type="Self.tblAuthor" Multiplicity="0..1" />
+          <End Role="Books_Authors" Type="Self.Books_Authors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAuthors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Books_Authors">
+              <PropertyRef Name="AuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Books_Aut__BookI__1A14E395">
+          <End Role="tblBooks" Type="Self.tblBook" Multiplicity="0..1" />
+          <End Role="Books_Authors" Type="Self.Books_Authors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBooks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Books_Authors">
+              <PropertyRef Name="BookId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Books_Cat__BookI__1CF15040">
+          <End Role="tblBooks" Type="Self.tblBook" Multiplicity="0..1" />
+          <End Role="Books_Category" Type="Self.Books_Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBooks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Books_Category">
+              <PropertyRef Name="BookId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Books_Cat__Categ__1BFD2C07">
+          <End Role="tblCategory" Type="Self.tblCategory" Multiplicity="0..1" />
+          <End Role="Books_Category" Type="Self.Books_Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Books_Category">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BooksEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Books_Authors" EntityType="Self.Books_Authors" />
+          <EntitySet Name="Books_Category" EntityType="Self.Books_Category" />
+          <EntitySet Name="tblAuthors" EntityType="Self.tblAuthor" />
+          <EntitySet Name="tblBooks" EntityType="Self.tblBook" />
+          <EntitySet Name="tblCategories" EntityType="Self.tblCategory" />
+          <EntitySet Name="tblSubCategories" EntityType="Self.tblSubCategory" />
+          <AssociationSet Name="FK__Books_Aut__Autho__1B0907CE" Association="Self.FK__Books_Aut__Autho__1B0907CE">
+            <End Role="tblAuthors" EntitySet="tblAuthors" />
+            <End Role="Books_Authors" EntitySet="Books_Authors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Books_Aut__BookI__1A14E395" Association="Self.FK__Books_Aut__BookI__1A14E395">
+            <End Role="tblBooks" EntitySet="tblBooks" />
+            <End Role="Books_Authors" EntitySet="Books_Authors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Books_Cat__BookI__1CF15040" Association="Self.FK__Books_Cat__BookI__1CF15040">
+            <End Role="tblBooks" EntitySet="tblBooks" />
+            <End Role="Books_Category" EntitySet="Books_Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Books_Cat__Categ__1BFD2C07" Association="Self.FK__Books_Cat__Categ__1BFD2C07">
+            <End Role="tblCategory" EntitySet="tblCategories" />
+            <End Role="Books_Category" EntitySet="Books_Category" />
+          </AssociationSet>
+          <FunctionImport Name="SelectBooks" ReturnType="Collection(BooksModel.SelectBooks_Result)">
+          <Parameter Name="SubId" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="SelectBooks_Result">
+          <Property Type="String" Name="BookName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Descrption" Nullable="true" />
+          <Property Type="DateTime" Name="Date" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SubName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BooksModelStoreContainer" CdmEntityContainer="BooksEntities">
+          <EntitySetMapping Name="Books_Authors">
+            <EntityTypeMapping TypeName="BooksModel.Books_Authors">
+              <MappingFragment StoreEntitySet="Books_Authors">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BookId" ColumnName="BookId" />
+                <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Books_Category">
+            <EntityTypeMapping TypeName="BooksModel.Books_Category">
+              <MappingFragment StoreEntitySet="Books_Category">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BookId" ColumnName="BookId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblAuthors">
+            <EntityTypeMapping TypeName="BooksModel.tblAuthor">
+              <MappingFragment StoreEntitySet="tblAuthors">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblBooks">
+            <EntityTypeMapping TypeName="BooksModel.tblBook">
+              <MappingFragment StoreEntitySet="tblBooks">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BookName" ColumnName="BookName" />
+                <ScalarProperty Name="Descrption" ColumnName="Descrption" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCategories">
+            <EntityTypeMapping TypeName="BooksModel.tblCategory">
+              <MappingFragment StoreEntitySet="tblCategory">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblSubCategories">
+            <EntityTypeMapping TypeName="BooksModel.tblSubCategory">
+              <MappingFragment StoreEntitySet="tblSubCategory">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SubName" ColumnName="SubName" />
+                <ScalarProperty Name="MainCat" ColumnName="MainCat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SelectBooks" FunctionName="BooksModel.Store.SelectBooks">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BooksModel.SelectBooks_Result">
+                <ScalarProperty Name="BookName" ColumnName="BookName" />
+                <ScalarProperty Name="Descrption" ColumnName="Descrption" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SubName" ColumnName="SubName" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

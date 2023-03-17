@@ -1,0 +1,94 @@
+﻿@model Books_System.Models.items
+
+@{
+    ViewBag.Title = "Details";
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<style>
+    dt{text-align:left!important}
+</style>
+<h2>Details</h2>
+
+<div>
+    <h4>items</h4>
+    <hr />
+    <dl class="dl-horizontal" dir="ltr" style="text-align:left">
+        <dt>
+            @Html.DisplayNameFor(model => model.title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.title)
+        </dd></br>
+        <dt>
+            @Html.DisplayNameFor(model => model.is_answered)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.is_answered)
+        </dd>
+        </br>
+        <dt>
+            @Html.DisplayNameFor(model => model.view_count)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.view_count)
+        </dd>
+        </br>
+        <dt>
+            @Html.DisplayNameFor(model => model.answer_count)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.answer_count)
+        </dd>
+        </br>
+        <dt>
+            @Html.DisplayNameFor(model => model.creation_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.creation_date)
+        </dd>
+        </br>
+        <dt>
+            @Html.DisplayNameFor(model => model.score)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.score)
+        </dd>
+        </br>
+        <dt>
+            @Html.DisplayNameFor(model => model.question_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.question_id)
+        </dd>
+        </br>
+        <dt>
+            @Html.DisplayNameFor(model => model.content_license)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.content_license)
+        </dd>
+        </br>
+        <dt>
+            @Html.DisplayNameFor(model => model.link)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.link)
+        </dd>
+
+       
+
+    </dl>
+</div>
+<p>
+    
+    @Html.ActionLink("Back to List", "Index_SOF", new { id = "" }, new { @class = "btn btn-info" })
+</p>

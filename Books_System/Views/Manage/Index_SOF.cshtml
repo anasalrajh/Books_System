@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Books_System.Models.items>
+
+@{
+    ViewBag.Title = "Index";
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("ID")
+        </th>
+        <th>
+            @Html.DisplayName("license")
+        </th>
+        <th>
+            @Html.DisplayName("title")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.question_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.content_license)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.title)
+        </td>
+        <td>
+           
+            @Html.ActionLink("Show", "Index_SOF", new { id = item.question_id }, new { @class = "btn btn-success"  }) 
+            
+        </td>
+    </tr>
+}
+
+</table>
